@@ -1298,7 +1298,7 @@
     }
 
     .testModeBadge{
-      display:block;
+      display:none;
       margin:18px 0 0;
       padding:11px 14px;
       border-radius:14px;
@@ -1309,6 +1309,8 @@
       font-weight:800;
       text-align:center;
     }
+
+    .testModeBadge.is-visible{ display:block; }
 
     .paymentReturnMessage{
       display:none;
@@ -2145,9 +2147,7 @@
     class="paymentReturnMessage">
     </div>
 
-    <div class="testModeBadge">
-    🧪 وضع تجريبي — لن يتم خصم أموال حقيقية
-    </div>
+    <div id="paymentModeBadge" class="testModeBadge" aria-live="polite">وضع تجريبي — لن يتم خصم أموال حقيقية</div>
 
     <button
     class="secondary"
@@ -2635,6 +2635,11 @@
     const PAYMENT_ENABLED=true;
 
 const PAYMENT_MODE="live";
+
+document.addEventListener("DOMContentLoaded", function(){
+  const badge = document.getElementById("paymentModeBadge");
+  if (badge) badge.classList.toggle("is-visible", PAYMENT_MODE === "test");
+});
 
 const MOYASAR_PUBLISHABLE_KEY="pk_live_xnhrL4cyQj3jRSuVnmxAUAf7WHGtehQUgfpNh5RG";
 
@@ -5035,7 +5040,7 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
     ".mysr-form",
 
     amount:
-    500,
+    Math.round(REPORT_PRICE*100),
 
     currency:
     "SAR",
@@ -5512,7 +5517,7 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
      }
     }
 
-    lastResultText="نتيجتي في "+test.title+"\n"+title.innerText+"\n\nجرّب اختبارات وَعْي:\nhttps://nthagafi1403-gif.github.io/waei/";
+    lastResultText="نتيجتي في "+test.title+"\n"+title.innerText+"\n\nجرّب اختبارات وَعْي:\nhttps://nthagafi1403-gif.github.io/";
     }
 
 
@@ -5725,7 +5730,7 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
 
     Number(
     verification.amount
-    )===500 &&
+    )===Math.round(REPORT_PRICE*100) &&
 
     String(
     verification.currency
@@ -5834,7 +5839,7 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
     message.innerHTML=
 
     "<strong>لم تكتمل عملية الدفع.</strong><br>"+
-    "لم يتم فتح التقرير. حاول مرة أخرى باستخدام وسيلة دفع تجريبية صالحة.";
+    "لم يتم فتح التقرير. تأكد من حالة العملية، ثم حاول مرة أخرى عند الحاجة.";
 
 
     }
@@ -5974,3 +5979,4 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
     </script>
 
 </body>
+</html>
