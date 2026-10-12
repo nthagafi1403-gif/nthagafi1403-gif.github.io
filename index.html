@@ -1768,6 +1768,23 @@
       z-index:1;
     }
 
+
+/* تعديل حجم مربع رحلة لفهم نفسك فقط — 2026-10-12 */
+.heroIntro.journeyPhotoBox{padding:20px 20px 16px;margin-bottom:24px;border-radius:26px}
+.heroIntro.journeyPhotoBox h1{font-size:clamp(24px,4.5vw,34px);line-height:1.3;margin-bottom:9px}
+.heroIntro.journeyPhotoBox h1::after{width:46px;height:4px;margin-top:8px}
+.heroIntro.journeyPhotoBox .muted{font-size:clamp(14px,3.4vw,18px);line-height:1.65;margin-bottom:10px}
+.heroIntro.journeyPhotoBox .heroPrice{font-size:clamp(16px,3.7vw,21px);line-height:1.4}
+.heroIntro.journeyPhotoBox .pricePill{margin-top:5px;padding:3px 16px 5px}
+.heroIntro.journeyPhotoBox .arrowMark{width:34px;height:34px;margin-top:10px;font-size:21px}
+.heroIntro.journeyPhotoBox::after{height:100px;bottom:-55px}
+@media(max-width:700px){
+ .heroIntro.journeyPhotoBox{padding:18px 15px 14px;margin-bottom:20px;border-radius:24px}
+ .heroIntro.journeyPhotoBox h1{font-size:clamp(23px,6vw,29px);margin-bottom:8px}
+ .heroIntro.journeyPhotoBox .muted{font-size:15px;line-height:1.6;margin-bottom:10px}
+ .heroIntro.journeyPhotoBox .heroPrice{font-size:17px;line-height:1.45}
+ .heroIntro.journeyPhotoBox .arrowMark{width:32px;height:32px;margin-top:9px}
+}
 </style>
 
 
