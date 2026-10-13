@@ -1785,6 +1785,26 @@
  .heroIntro.journeyPhotoBox .heroPrice{font-size:17px;line-height:1.45}
  .heroIntro.journeyPhotoBox .arrowMark{width:32px;height:32px;margin-top:9px}
 }
+
+    /* خلفيات صور الاختبارات الخافتة — دون تغيير العناصر أو الدفع */
+    .testCard.hasPhoto{
+      background-image:linear-gradient(rgba(255,255,255,.91),rgba(255,255,255,.94)),var(--waei-test-bg);
+      background-size:cover;
+      background-position:center;
+    }
+    .testCard.hasPhoto .testPhoto{position:relative;z-index:1;}
+    .testCard.hasPhoto > :not(.testPhoto){position:relative;z-index:1;}
+    #quiz.waeiPhotoBackground{
+      background-image:linear-gradient(rgba(255,255,255,.93),rgba(255,255,255,.95)),var(--waei-test-bg);
+      background-size:cover;
+      background-position:center;
+    }
+    .testCard.waeiSignatureBackground{
+      background-image:linear-gradient(rgba(255,255,255,.91),rgba(255,255,255,.94)),var(--waei-test-bg);
+      background-size:cover;
+      background-position:center;
+    }
+
 </style>
 
 
@@ -3942,6 +3962,10 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
     card.className=
     "card testCard hasPhoto";
 
+    if(TEST_IMAGES[index]){
+      card.style.setProperty('--waei-test-bg',`url("${TEST_IMAGES[index]}")`);
+    }
+
 
     card.innerHTML=`
 
@@ -4020,6 +4044,12 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
         <span class="priceBadge">التحليل الكامل 5 ر.س</span>
       </div>
     `;
+
+    const signaturePhoto=signatureCard.querySelector('img');
+    if(signaturePhoto){
+      signatureCard.classList.add('waeiSignatureBackground');
+      signatureCard.style.setProperty('--waei-test-bg',`url("${signaturePhoto.src}")`);
+    }
 
     if(container.children.length>1){
       container.insertBefore(
@@ -4110,6 +4140,16 @@ const MOYASAR_CALLBACK_URL="https://nthagafi1403-gif.github.io/";
 
     function startTest(index){
 
+    const quizPanel=document.getElementById('quiz');
+    if(quizPanel){
+      if(TEST_IMAGES[index]){
+        quizPanel.style.setProperty('--waei-test-bg',`url("${TEST_IMAGES[index]}")`);
+        quizPanel.classList.add('waeiPhotoBackground');
+      }else{
+        quizPanel.style.removeProperty('--waei-test-bg');
+        quizPanel.classList.remove('waeiPhotoBackground');
+      }
+    }
 
     currentTest=index;
 
