@@ -235,15 +235,15 @@
     .heroMenu{
 
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
 
     }
 
 
 
     .heroMenu .termsMenuButton{
-      grid-column:1 / -1;
+      grid-column:auto;
     }
 
     .heroMenu button{
@@ -1459,7 +1459,7 @@
       .heroMenu{
 
         grid-template-columns:
-        1fr 1fr;
+        repeat(3,minmax(0,1fr));
 
       }
 
