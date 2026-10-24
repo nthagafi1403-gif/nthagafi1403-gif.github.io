@@ -8452,7 +8452,21 @@ function results(tips,closingMessage){
  const back=e('button','العودة للبرامج','wpClose wpReturn');back.type='button';back.onclick=list;panel.append(save,back);
 
 }
-window.openWaeiPrograms=function(){overlay.classList.add('active');document.body.style.overflow='hidden';list()};window.closeWaeiPrograms=function(){overlay.classList.remove('active');document.body.style.overflow=''};
+window.openWaeiPrograms=function(){overlay.classList.add('active');document.body.style.overflow='hidden';list()};window.closeWaeiPrograms=function(){
+  overlay.classList.remove('active');
+  document.body.style.overflow='';
+  // On a payment return, dismiss the recovery dialog without navigating to
+  // a legacy landing page. Keep order details in storage for later verification.
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('program_payment')==='return'||params.get('program_payment')==='back'){
+    params.delete('program_payment');
+    params.delete('order_id');
+    const query=params.toString();
+    history.replaceState(history.state,'',location.pathname+(query?'?'+query:'')+location.hash);
+    const landing=document.getElementById('waeiCompactLanding');
+    if(landing){landing.style.removeProperty('display');landing.scrollIntoView({block:'start',behavior:'instant'});}
+  }
+};
 overlay.addEventListener('click',ev=>{if(ev.target===overlay)window.closeWaeiPrograms()});document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&overlay.classList.contains('active'))window.closeWaeiPrograms()});
 restoreProgramPayment();
 })();</script>
