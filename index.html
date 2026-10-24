@@ -11,16 +11,6 @@
       gtag('config', 'G-LY6EL1V4RT');
     </script>
 
-    <!-- Refresh a cached home page when returning via the browser Back button.
-         This does not change Moyasar callbacks or paid-report restoration. -->
-    <script id="waei-back-cache-refresh">
-    window.addEventListener('pageshow', function(event) {
-      if (!event.persisted) return;
-      var q = new URLSearchParams(window.location.search);
-      if (q.has('program_payment') || q.has('payment_id') || q.has('order_id')) return;
-      window.location.reload();
-    });
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#087da9">
@@ -8452,21 +8442,7 @@ function results(tips,closingMessage){
  const back=e('button','العودة للبرامج','wpClose wpReturn');back.type='button';back.onclick=list;panel.append(save,back);
 
 }
-window.openWaeiPrograms=function(){overlay.classList.add('active');document.body.style.overflow='hidden';list()};window.closeWaeiPrograms=function(){
-  overlay.classList.remove('active');
-  document.body.style.overflow='';
-  // On a payment return, dismiss the recovery dialog without navigating to
-  // a legacy landing page. Keep order details in storage for later verification.
-  const params=new URLSearchParams(window.location.search);
-  if(params.get('program_payment')==='return'||params.get('program_payment')==='back'){
-    params.delete('program_payment');
-    params.delete('order_id');
-    const query=params.toString();
-    history.replaceState(history.state,'',location.pathname+(query?'?'+query:'')+location.hash);
-    const landing=document.getElementById('waeiCompactLanding');
-    if(landing){landing.style.removeProperty('display');landing.scrollIntoView({block:'start',behavior:'instant'});}
-  }
-};
+window.openWaeiPrograms=function(){overlay.classList.add('active');document.body.style.overflow='hidden';list()};window.closeWaeiPrograms=function(){overlay.classList.remove('active');document.body.style.overflow=''};
 overlay.addEventListener('click',ev=>{if(ev.target===overlay)window.closeWaeiPrograms()});document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&overlay.classList.contains('active'))window.closeWaeiPrograms()});
 restoreProgramPayment();
 })();</script>
